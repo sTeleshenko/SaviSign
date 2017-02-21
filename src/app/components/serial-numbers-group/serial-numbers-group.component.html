@@ -34,6 +34,12 @@
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'licenseCount'"></span>
         </th>
+        <th ng-click="vm.onSortFiltersChanged('serialsCount')">
+          Serials Count
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'serialsCount'"></span>
+        </th>
         <th ng-click="vm.onSortFiltersChanged('testPeriod')">
           Test Period
           <span class="glyphicon glyphicon-triangle-bottom"
@@ -46,9 +52,6 @@
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'comments'"></span>
         </th>
-        <th>
-          View Serials
-        </th>
         <th class="col-actions">Actions</th>
         </thead>
         <tbody>
@@ -58,19 +61,18 @@
           <td>{{serialGroup.product.productId}}</td>
           <td>{{serialGroup.serialPrefix}}</td>
           <td>{{serialGroup.licenseCount}}</td>
+          <td>{{serialGroup.serialsCount}}</td>
           <td>{{serialGroup.testPeriod}}</td>
           <td>{{serialGroup.comments}}</td>
           <td class="col-actions">
-            <a class="btn btn-success" ui-sref="serialNumbersList({id: serialGroup._id})">
-              Serials
+            <!--<button type="button"-->
+                    <!--ng-click="vm.openAddSerialModal(serialGroup, $index)"-->
+                    <!--class="btn btn-primary btn-sm">-->
+              <!--<span class="glyphicon glyphicon-edit"></span>-->
+            <!--</button>-->
+            <a class="btn btn-success btn-sm" ui-sref="serialNumbersList({id: serialGroup._id})">
+              <span class="glyphicon glyphicon-eye-open"></span>
             </a>
-          </td>
-          <td class="col-actions">
-            <button type="button"
-                    ng-click="vm.openAddSerialModal(serialGroup, $index)"
-                    class="btn btn-primary btn-sm">
-              <span class="glyphicon glyphicon-edit"></span>
-            </button>
             <button type="button"
                     ng-click="vm.delete(serialGroup, $index)"
                     class="btn btn-danger btn-sm">
