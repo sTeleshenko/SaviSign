@@ -1,0 +1,95 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p>
+      <button class="btn btn-primary" ng-click="vm.openAddSerialModal({})">ADD</button>
+    </p>
+  </div>
+  <div class="col-xs-12">
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+        <th ng-click="vm.onSortFiltersChanged('dateCreate')">
+          Date
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'dateCreate'"></span>
+        </th>
+        <th>Time</th>
+        <th ng-click="vm.onSortFiltersChanged('product.productId')">
+          Product ID
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'product.productId'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('serialPrefix')">
+          Serial Prefix
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'serialPrefix'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('licenseCount')">
+          License Count
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'licenseCount'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('testPeriod')">
+          Test Period
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'testPeriod'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('comments')">
+          Comments
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'comments'"></span>
+        </th>
+        <th>
+          View Serials
+        </th>
+        <th class="col-actions">Actions</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="serialGroup in vm.serialGroups">
+          <td>{{serialGroup.dateCreate | date: 'dd.MM.yyyy'}}</td>
+          <td>{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>
+          <td>{{serialGroup.product.productId}}</td>
+          <td>{{serialGroup.serialPrefix}}</td>
+          <td>{{serialGroup.licenseCount}}</td>
+          <td>{{serialGroup.testPeriod}}</td>
+          <td>{{serialGroup.comments}}</td>
+          <td class="col-actions">
+            <a class="btn btn-success" ui-sref="serialNumbersList({id: serialGroup._id})">
+              Serials
+            </a>
+          </td>
+          <td class="col-actions">
+            <button type="button"
+                    ng-click="vm.openAddSerialModal(serialGroup, $index)"
+                    class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <button type="button"
+                    ng-click="vm.delete(serialGroup, $index)"
+                    class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul uib-pagination
+        total-items="vm.pagination.total"
+        ng-model="vm.pagination.page"
+        ng-change="vm.loadSerialGroups()"
+        max-size="6"
+        items-per-page="vm.pagination.limit"
+        class="pagination-sm pull-left"
+        boundary-link-numbers="true"></ul>
+
+  </div>
+</div>
+

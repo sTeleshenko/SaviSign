@@ -1,0 +1,46 @@
+
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <thead>
+          <th>Date Create</th>
+          <th>Key</th>
+          <th>License Count</th>
+          <th class="col-actions">Actions</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="serial in vm.serials">
+            <td>{{serial.dateCreate | date: 'dd.MM.yyyy'}}</td>
+            <td>{{serial.key}}</td>
+            <td>{{serial.licenseCount}}</td>
+            <td class="col-actions">
+              <button type="button"
+                      ng-click="vm.openSerialtModal(serial, $index)"
+                      class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+              <button type="button"
+                      ng-click="vm.delete(serial, $index)"
+                      class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <ul uib-pagination
+          total-items="vm.pagination.total"
+          ng-model="vm.pagination.page"
+          ng-change="vm.loadSerials()"
+          max-size="6"
+          items-per-page="vm.pagination.limit"
+          class="pagination-sm pull-left"
+          boundary-link-numbers="true">
+      </ul>
+
+    </div>
+  </div>
+

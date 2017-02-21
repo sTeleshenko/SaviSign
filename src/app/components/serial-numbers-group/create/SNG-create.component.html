@@ -1,0 +1,73 @@
+<form ng-submit="vm.save()" name="vm.form">
+  <div class="modal-header">
+    <h4>Add Serial Numbers group</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="productId">Product ID:</label>
+      <select name="productId"
+              id="productId"
+              ng-model="vm.serialGroup.product"
+              class="form-control"
+              ng-change="vm.productChanged()"
+              required
+              ng-options="product as product.productId for product in vm.products track by product._id">
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="serialPrefix">Serial Number Prefix(like 'AP-13FIRM')</label>
+      <input type="text"
+             ng-model="vm.serialGroup.serialPrefix"
+             id="serialPrefix"
+             name="serialPrefix"
+             class="form-control"
+             required>
+    </div>
+    <div class="form-group">
+      <label for="licenseCount">license Count Per Serial(0..30, 31 is unlimited):</label>
+      <input type="number"
+             ng-model="vm.serialGroup.licenseCount"
+             id="licenseCount"
+             class="form-control"
+             placeholder="License Count"
+             required
+             name="licenseCount">
+    </div>
+    <div class="form-group">
+      <label for="testPeriod">Serial Test Period(1..1000, 1001 is unlimited, 0 is for license keys):</label>
+      <input type="number"
+             ng-model="vm.serialGroup.testPeriod"
+             id="testPeriod"
+             class="form-control"
+             placeholder="Test Period"
+             required
+             name="testPeriod">
+    </div>
+    <div class="form-group">
+      <label for="serialsCount">Serials Count</label>
+      <input type="number"
+             ng-model="vm.serialGroup.serialsCount"
+             id="serialsCount"
+             class="form-control"
+             placeholder="Serials Count"
+             required
+             name="serialsCount">
+    </div>
+    <div class="form-group">
+      <label for="comments">Comments:</label>
+      <textarea
+        ng-model="vm.serialGroup.comments"
+        id="comments"
+        class="form-control"
+        placeholder="Comments"
+        name="comments">
+
+      </textarea>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-disabled="vm.form.$invalid">Save</button>
+    <button type="button" class="btn btn-warning" ng-click="vm.cancel()">Cancel</button>
+  </div>
+
+</form>

@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-xs-12">
+    <p>
+      <button class="btn btn-primary" ng-click="vm.openProductModal({})">Create</button>
+    </p>
+  </div>
+  <div class="col-xs-12">
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+        <th ng-click="vm.onSortFiltersChanged('productId')">
+          Product ID
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'productId'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('serialPrefix')">
+          Serial Prefix
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'serialPrefix'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('dateCreate')">
+          Date Create
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'dateCreate'"></span>
+        </th>
+        <th class="col-actions">Actions</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="product in vm.products">
+          <td>{{product.productId}}</td>
+          <td>{{product.serialPrefix}}</td>
+          <td>{{product.dateCreate | date: 'dd.MM.yyyy'}}</td>
+          <td class="col-actions">
+            <button type="button"
+                    ng-click="vm.openProductModal(product, $index)"
+                    class="btn btn-primary btn-sm">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <button type="button"
+                    ng-click="vm.delete(product, $index)"
+                    class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul uib-pagination
+        total-items="vm.pagination.total"
+        ng-model="vm.pagination.page"
+        ng-change="vm.loadProducts()"
+        max-size="6"
+        items-per-page="vm.pagination.limit"
+        class="pagination-sm pull-left"
+        boundary-link-numbers="true"></ul>
+
+  </div>
+</div>
