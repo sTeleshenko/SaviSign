@@ -1,0 +1,26 @@
+<div class="search-result">
+  <div ng-if="( !vm.results.products.length &&
+                !vm.results.serialGroups.length &&
+                !vm.results.serials.length)">
+    <div class="search-header" ng-show="!vm.resultNotFound">Please enter something</div>
+    <div class="search-header" ng-show="vm.resultNotFound">Not found</div>
+  </div>
+  <div ng-if="vm.results.products.length" class="search-result-group">
+    <div class="search-header">Products</div>
+    <a ui-sref="products({id: products._id})"
+       ng-repeat="product in vm.results.products"
+       class="search-item">{{product.productId}}</a>
+  </div>
+  <div ng-if="vm.results.serialGroups.length" class="search-result-group">
+    <div class="search-header">Serial Groups</div>
+      <a ui-sref="serialNumbersList({id: serialGroup._id})"
+         ng-repeat="serialGroup in vm.results.serialGroups"
+         class="search-item">{{serialGroup.serialPrefix}}</a>
+  </div>
+  <div ng-if="vm.results.serials.length" class="search-result-group">
+    <div class="search-header">Serials</div>
+    <a ui-sref="serialDetail({id: serial._id})"
+       ng-repeat="serial in vm.results.serials"
+       class="search-item">{{serial.key}}</a>
+  </div>
+</div>

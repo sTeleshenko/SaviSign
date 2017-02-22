@@ -56,11 +56,6 @@
           vm.serialGroups = response.data.docs;
           vm.pagination.total = response.data.total;
           vm.pagination.page = response.data.page;
-
-          // $http.get('/api/serials?serialGroup=' + response.data.docs[0]._id)
-          //   .then(function (response) {
-          //     console.table(response.data)
-          //   })
         })
         .catch(function () {
           toastr.error('Something went wrong', 'Error');
@@ -89,7 +84,7 @@
         size: 'sm',
         resolve: {
           message: function () {
-            return 'Are you sure to delete serials?';
+            return 'Are you sure to delete serials group?';
           }
         }
       }).result.then(function () {

@@ -18,6 +18,18 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a ui-sref="login">Logout</a></li>
         </ul>
+        <form class="navbar-form navbar-right global-search" ng-submit="vm.search()">
+          <div class="form-group">
+            <input type="text" class="form-control"
+                   ng-focus="vm.changeFocus()"
+                   ng-blur="vm.changeFocus()"
+                   ng-model="vm.searchText"
+                   ng-model-options="{debounce: 300}"
+                   ng-change="vm.search()"
+                   placeholder="Search">
+          </div>
+          <search-results-component result-not-found="vm.resultNotFound" results="vm.searchResults" ng-show="vm.focus"></search-results-component>
+        </form>
       </div>
     </div>
   </nav>

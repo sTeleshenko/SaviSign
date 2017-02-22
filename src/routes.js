@@ -48,5 +48,13 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
         roles: ['admin']
       }
     })
+    .state('serialDetail', {
+      url: '/serial/:id',
+      parent: 'main',
+      component: 'serialDetailComponent',
+      data: {
+        roles: ['admin']
+      }
+    })
 
 }

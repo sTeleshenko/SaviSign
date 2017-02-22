@@ -8,7 +8,7 @@
     });
 
   /** @ngInject */
-  function serialNumbersListComponent(Serial, localStorageService, $uibModal, toastr, $stateParams) {
+  function serialNumbersListComponent(Serial, $scope, localStorageService, $uibModal, toastr, $stateParams) {
     var vm = this;
     vm.$onInit = function () {
       vm.serials = [];
@@ -21,14 +21,21 @@
         limit: 10
       };
       vm.filters = localStorageService.get('serialsSortFilters') || {};
-      vm.loadSerials();
+      $scope.$watch('vm.filters', function () {
+        vm.loadSerials();
+      }, true);
+
     };
 
-    // vm.onFiltersChanged  = function (filters) {
-    //   localStorageService.set('serialsFilters', filters);
-    //   vm.filters = filters;
-    //   vm.loadSerials();
-    // };
+    vm.search  = function () {
+      localStorageService.set('serialsFilters', vm.filters);
+
+      vm.loadSerials();
+    };
+    vm.reset = function () {
+      vm.filters.key = '';
+      vm.loadSerials();
+    };
     //
     // vm.onSortFiltersChanged = function (key) {
     //   if(vm.sortFilters.sort === key){
@@ -51,7 +58,7 @@
       query = query + 'sort=' + (vm.sortFilters.order ? '' : '-') + vm.sortFilters.sort + '&';
       query = query + 'page=' + vm.pagination.page + '&';
       query = query + 'limit=' + vm.pagination.limit;
-      Serial.getSerials(query)
+      Serial.getAll(query)
         .then(function (response) {
           vm.serials = response.data.docs;
           vm.pagination.total = response.data.total;
@@ -61,26 +68,26 @@
           toastr.error('Something went wrong', 'Error');
         });
     };
-    // vm.delete = function (serialGroup) {
-    //   $uibModal.open({
-    //     animation: true,
-    //     component: 'confirmComponent',
-    //     size: 'sm',
-    //     resolve: {
-    //       message: function () {
-    //         return 'Are you sure to delete serials?';
-    //       }
-    //     }
-    //   }).result.then(function () {
-    //     SerialGroup.delete(serialGroup)
-    //       .then(function () {
-    //         vm.loadSerialGroups();
-    //       })
-    //       .catch(function () {
-    //         toastr.error('Something went wrong', 'Error');
-    //       })
-    //   });
-    // };
+    vm.delete = function (serial) {
+      $uibModal.open({
+        animation: true,
+        component: 'confirmComponent',
+        size: 'sm',
+        resolve: {
+          message: function () {
+            return 'Are you sure to delete serial?';
+          }
+        }
+      }).result.then(function () {
+        Serial.delete(serial)
+          .then(function () {
+            vm.loadSerials();
+          })
+          .catch(function () {
+            toastr.error('Something went wrong', 'Error');
+          })
+      });
+    };
   }
 
 })();

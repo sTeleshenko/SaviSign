@@ -9,6 +9,12 @@
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
+        <th ng-click="vm.onSortFiltersChanged('index')">
+          №
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'index'"></span>
+        </th>
         <th ng-click="vm.onSortFiltersChanged('dateCreate')">
           Date
           <span class="glyphicon glyphicon-triangle-bottom"
@@ -40,6 +46,12 @@
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'serialsCount'"></span>
         </th>
+        <th ng-click="vm.onSortFiltersChanged('firstSerial')">
+          First Serial
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'firstSerial'"></span>
+        </th>
         <th ng-click="vm.onSortFiltersChanged('testPeriod')">
           Test Period
           <span class="glyphicon glyphicon-triangle-bottom"
@@ -56,14 +68,16 @@
         </thead>
         <tbody>
         <tr ng-repeat="serialGroup in vm.serialGroups">
-          <td>{{serialGroup.dateCreate | date: 'dd.MM.yyyy'}}</td>
-          <td>{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>
-          <td>{{serialGroup.product.productId}}</td>
-          <td>{{serialGroup.serialPrefix}}</td>
-          <td>{{serialGroup.licenseCount}}</td>
-          <td>{{serialGroup.serialsCount}}</td>
-          <td>{{serialGroup.testPeriod}}</td>
-          <td>{{serialGroup.comments}}</td>
+          <td class="text-center">{{serialGroup.index}}</td>
+          <td class="text-center">{{serialGroup.dateCreate | date: 'dd.MM.yyyy'}}</td>
+          <td class="text-center">{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>
+          <td class="text-center">{{serialGroup.product.productId}}</td>
+          <td class="text-center">{{serialGroup.serialPrefix}}</td>
+          <td class="text-center">{{serialGroup.licenseCount}}</td>
+          <td class="text-center">{{serialGroup.serialsCount}}</td>
+          <td class="text-center">{{serialGroup.firstSerial}}</td>
+          <td class="text-center">{{serialGroup.testPeriod}}</td>
+          <td class="text-center">{{serialGroup.comments}}</td>
           <td class="col-actions">
             <!--<button type="button"-->
                     <!--ng-click="vm.openAddSerialModal(serialGroup, $index)"-->
