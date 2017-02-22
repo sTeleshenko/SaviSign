@@ -22,17 +22,17 @@
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
-        <th>№</th>
-        <th>Date Create</th>
+        <th class="text-center">№</th>
+        <th class="text-center">Date Create</th>
         <th>Key</th>
-        <th>License Count</th>
+        <th class="text-center">License Count</th>
         <th class="col-actions">Actions</th>
         </thead>
         <tbody>
         <tr ng-repeat="serial in vm.serials">
           <td class="text-center">{{serial.docIndex}}</td>
           <td class="text-center">{{serial.dateCreate | date: 'dd.MM.yyyy'}}</td>
-          <td class="text-center">{{serial.key}}</td>
+          <td>{{serial.key}}</td>
           <td class="text-center">{{serial.licenseCount}}</td>
           <td class="col-actions">
             <!--<button type="button"-->

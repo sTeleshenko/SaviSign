@@ -7,7 +7,8 @@
       controllerAs: 'vm',
       bindings: {
         results: '<',
-        resultNotFound: '<'
+        resultNotFound: '<',
+        searchText: '<'
       }
     });
 

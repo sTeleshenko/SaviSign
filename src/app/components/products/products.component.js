@@ -8,30 +8,52 @@
     });
 
   /** @ngInject */
-  function productsComponent(Product, localStorageService, $uibModal, toastr) {
+  function productsComponent(Product, localStorageService, $uibModal, toastr, $stateParams, $state, $scope) {
     var vm = this;
     vm.$onInit = function () {
       vm.products = [];
       vm.sortFilters = localStorageService.get('productSortFilters') || {
-          sort: 'productId',
-          order: true
-        };
+        sort: 'productId',
+        order: true
+      };
       vm.pagination = {
         page: 1,
         limit: 10
       };
-      vm.filters = localStorageService.get('productFilters') || {};
+      if ($stateParams.productId || $stateParams.serialPrefix) {
+        vm.filters = {
+          productId: $stateParams.productId,
+          serialPrefix: $stateParams.serialPrefix
+        };
+        localStorageService.set('productFilters', vm.filters);
+      } else {
+        vm.filters = localStorageService.get('productFilters') || {};
+        $state.transitionTo('products', vm.filters);
+      }
+      vm.loadProducts();
+      $scope.$watch('vm.filters', vm.onFiltersChanged, true);
+    };
+
+    vm.uiOnParamsChanged = function (newParams) {
+      for (var key in newParams) {
+        if (vm.filters[key] !== newParams[key]) {
+          vm.filters[key] = newParams[key];
+        }
+      }
+    };
+
+    vm.onFiltersChanged = function () {
+      $state.transitionTo('products', vm.filters);
+      localStorageService.set('productFilters', vm.filters);
       vm.loadProducts();
     };
 
-    vm.onFiltersChanged  = function (filters) {
-      localStorageService.set('productFilters', filters);
-      vm.filters = filters;
-      vm.loadProducts();
-    };
+    vm.resetFilters = function () {
+      vm.filters = {};
+    }
 
     vm.onSortFiltersChanged = function (key) {
-      if(vm.sortFilters.sort === key){
+      if (vm.sortFilters.sort === key) {
         vm.sortFilters.order = !vm.sortFilters.order;
       } else {
         vm.sortFilters.sort = key;
@@ -43,8 +65,8 @@
 
     vm.loadProducts = function () {
       var query = '?';
-      for(var key in vm.filters) {
-        if(vm.filters[key]){
+      for (var key in vm.filters) {
+        if (vm.filters[key]) {
           query = query + key + '=' + vm.filters[key] + '&'
         }
       }

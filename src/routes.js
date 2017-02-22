@@ -25,16 +25,18 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('products', {
-      url: '/products',
+      url: '/products?productId&serialPrefix',
       parent: 'main',
+      reloadOnSearch: false,
       component: 'productsComponent',
       data: {
         roles: ['admin']
       }
     })
     .state('serialGroups', {
-      url: '/serialGroups',
+      url: '/serialGroups?productId&serialPrefix',
       parent: 'main',
+      reloadOnSearch: false,
       component: 'serialNumbersGroupComponent',
       data: {
         roles: ['admin']

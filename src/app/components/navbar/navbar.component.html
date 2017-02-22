@@ -28,7 +28,10 @@
                    ng-change="vm.search()"
                    placeholder="Search">
           </div>
-          <search-results-component result-not-found="vm.resultNotFound" results="vm.searchResults" ng-show="vm.focus"></search-results-component>
+          <search-results-component result-not-found="vm.resultNotFound" 
+                                    search-text="vm.searchText"
+                                    results="vm.searchResults" 
+                                    ng-show="vm.focus"></search-results-component>
         </form>
       </div>
     </div>

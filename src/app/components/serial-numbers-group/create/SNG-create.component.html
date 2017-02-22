@@ -30,6 +30,9 @@
              id="licenseCount"
              class="form-control"
              placeholder="License Count"
+             max="31"
+             min="0"
+             step="1"
              required
              name="licenseCount">
     </div>
@@ -41,9 +44,12 @@
              class="form-control"
              placeholder="Test Period"
              required
+             max="1001"
+             min="0"
+             step="1"
              name="testPeriod">
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="firstSerial">First Serial</label>
       <input type="number"
              ng-model="vm.serialGroup.firstSerial"
@@ -52,7 +58,7 @@
              placeholder="First Serial"
              required
              name="firstSerial">
-    </div>
+    </div>-->
     <div class="form-group">
       <label for="serialsCount">Serials Count</label>
       <input type="number"

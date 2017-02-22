@@ -1,58 +1,80 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-md-3">
+    <form ng-submit="vm.onFiltersChanged()">
+      <div class="form-group">
+        <label for="productIdSearch">Product ID:</label>
+        <input type="text" 
+               name="productIdserch" 
+               ng-model-options="{debounce: 300}"
+               class="form-control" 
+               ng-model="vm.filters.productId">
+      </div>
+      <div class="form-group">
+        <label for="serialPrefix">Serial Prefix:</label>
+        <input type="text" 
+               name="serialPrefix" 
+               ng-model-options="{debounce: 300}"
+               class="form-control" 
+               ng-model="vm.filters.serialPrefix">
+      </div>
+      <div class="text-right">
+        <button type="button" class="btn btn-warning" ng-click="vm.resetFilters()">Reset</button>
+        <button class="btn btn-success" type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-9">
     <p>
       <button class="btn btn-primary" ng-click="vm.openAddSerialModal({})">ADD</button>
     </p>
-  </div>
-  <div class="col-xs-12">
 
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
-        <th ng-click="vm.onSortFiltersChanged('docIndex')">
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('docIndex')">
           №
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'docIndex'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('dateCreate')">
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('dateCreate')">
           Date
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'dateCreate'"></span>
         </th>
-        <th>Time</th>
-        <th ng-click="vm.onSortFiltersChanged('product.productId')">
+        <!--<th class="text-center">Time</th>-->
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('product.productId')">
           Product ID
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'product.productId'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('serialPrefix')">
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('serialPrefix')">
           Serial Prefix
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'serialPrefix'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('licenseCount')">
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('licenseCount')">
           License Count
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'licenseCount'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('serialsCount')">
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('serialsCount')">
           Serials Count
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'serialsCount'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('firstSerial')">
+        <!--<th ng-click="vm.onSortFiltersChanged('firstSerial')">
           First Serial
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'firstSerial'"></span>
-        </th>
-        <th ng-click="vm.onSortFiltersChanged('testPeriod')">
+        </th>-->
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('testPeriod')">
           Test Period
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
@@ -70,14 +92,18 @@
         <tr ng-repeat="serialGroup in vm.serialGroups">
           <td class="text-center">{{serialGroup.docIndex}}</td>
           <td class="text-center">{{serialGroup.dateCreate | date: 'dd.MM.yyyy'}}</td>
-          <td class="text-center">{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>
+          <!--<td class="text-center">{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>-->
           <td class="text-center">{{serialGroup.product.productId}}</td>
           <td class="text-center">{{serialGroup.serialPrefix}}</td>
-          <td class="text-center">{{serialGroup.licenseCount}}</td>
+          <td class="text-center">{{serialGroup.licenseCount === 31 ? 'unlimited' : serialGroup.licenseCount }}</td>
           <td class="text-center">{{serialGroup.serialsCount}}</td>
-          <td class="text-center">{{serialGroup.firstSerial}}</td>
-          <td class="text-center">{{serialGroup.testPeriod}}</td>
-          <td class="text-center">{{serialGroup.comments}}</td>
+          <!--<td class="text-center">{{serialGroup.firstSerial}}</td>-->
+          <td class="text-center">
+            <span ng-if="serialGroup.testPeriod === 1001">unlimited</span>
+            <span ng-if="serialGroup.testPeriod === 0">license only</span>
+            <span ng-if="serialGroup.testPeriod > 0 && serialGroup.testPeriod < 1001">{{serialGroup.testPeriod}}</span>
+          </td>
+          <td>{{serialGroup.comments}}</td>
           <td class="col-actions">
             <!--<button type="button"-->
                     <!--ng-click="vm.openAddSerialModal(serialGroup, $index)"-->

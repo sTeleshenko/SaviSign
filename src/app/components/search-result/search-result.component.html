@@ -7,18 +7,18 @@
   </div>
   <div ng-if="vm.results.products.length" class="search-result-group">
     <div class="search-header">Products</div>
-    <a ui-sref="products({id: products._id})"
+    <a ui-sref="products({productId: product.productId, serialPrefix: product.serialPrefix})"
        ng-repeat="product in vm.results.products"
        class="search-item">{{product.productId}}</a>
   </div>
   <div ng-if="vm.results.serialGroups.length" class="search-result-group">
-    <div class="search-header">Serial Groups</div>
+    <div class="search-header">Serial Number Group</div>
       <a ui-sref="serialNumbersList({id: serialGroup._id})"
          ng-repeat="serialGroup in vm.results.serialGroups"
-         class="search-item">{{serialGroup.serialPrefix}}</a>
+         class="search-item">{{serialGroup.product.productId}}-{{serialGroup.serialPrefix}}</a>
   </div>
   <div ng-if="vm.results.serials.length" class="search-result-group">
-    <div class="search-header">Serials</div>
+    <div class="search-header">Serial Number</div>
     <a ui-sref="serialDetail({id: serial._id})"
        ng-repeat="serial in vm.results.serials"
        class="search-item">{{serial.key}}</a>

@@ -8,7 +8,7 @@
     });
 
   /** @ngInject */
-  function serialNumberGroupComponent(SerialGroup, localStorageService, $uibModal, toastr) {
+  function serialNumberGroupComponent(SerialGroup, localStorageService, $uibModal, toastr, $state, $stateParams, $scope) {
     var vm = this;
     vm.$onInit = function () {
       vm.serialGroups = [];
@@ -20,15 +20,38 @@
         page: 1,
         limit: 10
       };
+      if ($stateParams.productId || $stateParams.serialPrefix) {
+        vm.filters = {
+          productId: $stateParams.productId,
+          serialPrefix: $stateParams.serialPrefix
+        };
+        localStorageService.set('serialGroupFilters', vm.filters);
+      } else {
+        vm.filters = localStorageService.get('serialGroupFilters') || {};
+        $state.transitionTo('serialGroups', vm.filters);
+      }
       vm.filters = localStorageService.get('serialGroupFilters') || {};
+      $scope.$watch('vm.filters', vm.onFiltersChanged, true);
       vm.loadSerialGroups();
     };
 
-    vm.onFiltersChanged  = function (filters) {
-      localStorageService.set('serialGroupFilters', filters);
-      vm.filters = filters;
+    vm.uiOnParamsChanged = function (newParams) {
+      for (var key in newParams) {
+        if (vm.filters[key] !== newParams[key]) {
+          vm.filters[key] = newParams[key];
+        }
+      }
+    };
+
+    vm.onFiltersChanged  = function () {
+      $state.transitionTo('serialGroups', vm.filters);
+      localStorageService.set('serialGroupFilters', vm.filters);
       vm.loadSerialGroups();
     };
+
+    vm.resetFilters = function () {
+      vm.filters = {};
+    }
 
     vm.onSortFiltersChanged = function (key) {
       if(vm.sortFilters.sort === key){
