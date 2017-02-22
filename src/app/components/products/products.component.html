@@ -9,6 +9,11 @@
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
+        <th ng-click="vm.onSortFiltersChanged('docIndex')">
+          №
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'docIndex'"></span>
         <th ng-click="vm.onSortFiltersChanged('productId')">
           Product ID
           <span class="glyphicon glyphicon-triangle-bottom"
@@ -31,6 +36,7 @@
         </thead>
         <tbody>
         <tr ng-repeat="product in vm.products">
+          <td>{{product.docIndex}}</td>
           <td>{{product.productId}}</td>
           <td>{{product.serialPrefix}}</td>
           <td>{{product.dateCreate | date: 'dd.MM.yyyy'}}</td>
