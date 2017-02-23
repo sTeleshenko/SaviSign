@@ -3,18 +3,18 @@
     <form ng-submit="vm.onFiltersChanged()">
       <div class="form-group">
         <label for="productIdSearch">Product ID:</label>
-        <input type="text" 
-               name="productIdserch" 
+        <input type="text"
+               name="productIdserch"
                ng-model-options="{debounce: 300}"
-               class="form-control" 
+               class="form-control"
                ng-model="vm.filters.productId">
       </div>
       <div class="form-group">
         <label for="serialPrefix">Serial Prefix:</label>
-        <input type="text" 
-               name="serialPrefix" 
+        <input type="text"
+               name="serialPrefix"
                ng-model-options="{debounce: 300}"
-               class="form-control" 
+               class="form-control"
                ng-model="vm.filters.serialPrefix">
       </div>
       <div class="text-right">
@@ -95,12 +95,12 @@
           <!--<td class="text-center">{{serialGroup.dateCreate | date: 'HH:mm:ss'}}</td>-->
           <td class="text-center">{{serialGroup.product.productId}}</td>
           <td class="text-center">{{serialGroup.serialPrefix}}</td>
-          <td class="text-center">{{serialGroup.licenseCount === 31 ? 'unlimited' : serialGroup.licenseCount }}</td>
+          <td class="text-center">{{serialGroup.licenseCount === 31 ? 'Unlimited' : serialGroup.licenseCount }}</td>
           <td class="text-center">{{serialGroup.serialsCount}}</td>
           <!--<td class="text-center">{{serialGroup.firstSerial}}</td>-->
           <td class="text-center">
-            <span ng-if="serialGroup.testPeriod === 1001">unlimited</span>
-            <span ng-if="serialGroup.testPeriod === 0">license only</span>
+            <span ng-if="serialGroup.testPeriod === 1001">Unlimited</span>
+            <span ng-if="serialGroup.testPeriod === 0">License only</span>
             <span ng-if="serialGroup.testPeriod > 0 && serialGroup.testPeriod < 1001">{{serialGroup.testPeriod}}</span>
           </td>
           <td>{{serialGroup.comments}}</td>

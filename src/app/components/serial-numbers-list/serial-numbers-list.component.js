@@ -8,23 +8,31 @@
     });
 
   /** @ngInject */
-  function serialNumbersListComponent(Serial, $scope, localStorageService, $uibModal, toastr, $stateParams) {
+  function serialNumbersListComponent(Serial ,SerialGroup, $scope, localStorageService, $uibModal, toastr, $stateParams) {
     var vm = this;
     vm.$onInit = function () {
       vm.serials = [];
+      vm.getThisGroup();
+      vm.thisGroup = {};
       vm.sortFilters = localStorageService.get('serialsSortFilters') || {
-          sort: 'licenseCount',
+          sort: 'docIndex',
           order: true
         };
       vm.pagination = {
         page: 1,
         limit: 10
       };
-      vm.filters = localStorageService.get('serialsSortFilters') || {};
+      vm.filters = localStorageService.get('serialsFilters') || {};
       $scope.$watch('vm.filters', function () {
         vm.loadSerials();
       }, true);
+    };
 
+    vm.getThisGroup = function() {
+      SerialGroup.getOne($stateParams.id)
+        .then(function (response) {
+          vm.thisGroup = response.data;
+        })
     };
 
     vm.search  = function () {
@@ -33,20 +41,19 @@
       vm.loadSerials();
     };
     vm.reset = function () {
-      vm.filters.key = '';
+      vm.filters = {};
+    };
+
+    vm.onSortFiltersChanged = function (key) {
+      if(vm.sortFilters.sort === key){
+        vm.sortFilters.order = !vm.sortFilters.order;
+      } else {
+        vm.sortFilters.sort = key;
+        vm.sortFilters.order = true;
+      }
+      localStorageService.set('serialsSortFilters', vm.sortFilters);
       vm.loadSerials();
     };
-    //
-    // vm.onSortFiltersChanged = function (key) {
-    //   if(vm.sortFilters.sort === key){
-    //     vm.sortFilters.order = !vm.sortFilters.order;
-    //   } else {
-    //     vm.sortFilters.sort = key;
-    //     vm.sortFilters.order = true;
-    //   }
-    //   localStorageService.set('serialsSortFilters', vm.sortFilters);
-    //   vm.loadSerials();
-    // };
 
     vm.loadSerials = function () {
       var query = '?' + 'serialGroup=' + $stateParams.id + '&';

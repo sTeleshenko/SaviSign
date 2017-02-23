@@ -1,5 +1,18 @@
 <div class="row">
   <div class="col-md-3">
+    <uib-accordion close-others="oneAtATime">
+      <div uib-accordion-group class="panel-primary" heading="Group info">
+        <p><b>Product ID: </b>{{vm.thisGroup.product.productId}}</p>
+        <p><b>Serial Prefix: </b>{{vm.thisGroup.serialPrefix}}</p>
+        <p><b>Serials Count: </b>{{vm.thisGroup.serialsCount}}</p>
+        <p><b>Test Period: </b>
+          <span ng-if="vm.thisGroup.testPeriod === 1001">Unlimited</span>
+          <span ng-if="vm.thisGroup.testPeriod === 0">License only</span>
+          <span ng-if="vm.thisGroup.testPeriod > 0 && vm.thisGroup.testPeriod < 1001">{{vm.thisGroup.testPeriod}}</span>
+        </p>
+        <p><b>Comments: </b>{{vm.thisGroup.comments}}</p>
+      </div>
+    </uib-accordion>
     <form name="vm.form"
           ng-model-options="{debounce: 300}"
           ng-submit="vm.search()">
@@ -12,6 +25,15 @@
                class="form-control"
                placeholder="Serial Key">
       </div>
+      <div class="form-group">
+        <label for="docIndex">№:</label>
+        <input type="number"
+               ng-model="vm.filters.docIndex"
+               id="docIndex"
+               name="serialKey"
+               class="form-control"
+               placeholder="№:">
+      </div>
       <div class="text-right">
         <button type="button" class="btn btn-warning" ng-click="vm.reset()">Reset</button>
         <button type="submit" class="btn btn-success">Search</button></div>
@@ -22,7 +44,12 @@
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
-        <th class="text-center">№</th>
+        <th class="text-center" ng-click="vm.onSortFiltersChanged('docIndex')">
+          №
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'docIndex'"></span>
+        </th>
         <th class="text-center">Date Create</th>
         <th>Key</th>
         <th class="text-center">License Count</th>
@@ -33,7 +60,7 @@
           <td class="text-center">{{serial.docIndex}}</td>
           <td class="text-center">{{serial.dateCreate | date: 'dd.MM.yyyy'}}</td>
           <td>{{serial.key}}</td>
-          <td class="text-center">{{serial.licenseCount}}</td>
+          <td class="text-center">{{serial.licenseCount === 31 ? 'unlimited' : serial.licenseCount }}</td>
           <td class="col-actions">
             <!--<button type="button"-->
             <!--ng-click="vm.openSerialtModal(serial, $index)"-->

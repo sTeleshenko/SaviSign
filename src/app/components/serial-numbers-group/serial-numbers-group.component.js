@@ -13,7 +13,7 @@
     vm.$onInit = function () {
       vm.serialGroups = [];
       vm.sortFilters = localStorageService.get('serialGroupSortFilters') || {
-          sort: 'licenseCount',
+          sort: 'docIndex',
           order: true
         };
       vm.pagination = {
@@ -51,7 +51,7 @@
 
     vm.resetFilters = function () {
       vm.filters = {};
-    }
+    };
 
     vm.onSortFiltersChanged = function (key) {
       if(vm.sortFilters.sort === key){
