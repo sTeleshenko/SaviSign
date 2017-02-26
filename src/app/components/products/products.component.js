@@ -20,10 +20,10 @@
         page: 1,
         limit: 10
       };
-      if ($stateParams.productId || $stateParams.serialPrefix) {
+      if ($stateParams.productId || $stateParams.name) {
         vm.filters = {
           productId: $stateParams.productId,
-          serialPrefix: $stateParams.serialPrefix
+          name: $stateParams.name
         };
         localStorageService.set('productFilters', vm.filters);
       } else {

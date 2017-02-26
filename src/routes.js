@@ -25,7 +25,7 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       }
     })
     .state('products', {
-      url: '/products?productId&serialPrefix',
+      url: '/products?productId&name',
       parent: 'main',
       reloadOnSearch: false,
       component: 'productsComponent',

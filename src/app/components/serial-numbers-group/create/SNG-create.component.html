@@ -4,14 +4,13 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label for="productId">Product ID:</label>
+      <label for="productId">Product:</label>
       <select name="productId"
               id="productId"
               ng-model="vm.serialGroup.product"
               class="form-control"
-              ng-change="vm.productChanged()"
               required
-              ng-options="product as product.productId for product in vm.products track by product._id">
+              ng-options="product as product.name for product in vm.products track by product._id">
       </select>
     </div>
     <div class="form-group">
