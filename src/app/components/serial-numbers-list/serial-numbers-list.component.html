@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-3">
     <uib-accordion close-others="oneAtATime">
-      <div uib-accordion-group class="panel-primary" heading="Group info">
-        <p><b>Product ID: </b>{{vm.thisGroup.product.productId}}</p>
+      <div uib-accordion-group class="panel-primary" heading="Group info" is-open="true">
+        <p><b>Product Name: </b>{{vm.thisGroup.product.name}}</p>
         <p><b>Serial Prefix: </b>{{vm.thisGroup.serialPrefix}}</p>
         <p><b>Serials Count: </b>{{vm.thisGroup.serialsCount}}</p>
         <p><b>Test Period: </b>
@@ -53,6 +53,7 @@
         <th class="text-center">Date Create</th>
         <th>Key</th>
         <th class="text-center">License Count</th>
+        <th class="text-center">Activations Count</th>
         <th class="col-actions">Actions</th>
         </thead>
         <tbody>
@@ -61,6 +62,7 @@
           <td class="text-center">{{serial.dateCreate | date: 'dd.MM.yyyy'}}</td>
           <td>{{serial.key}}</td>
           <td class="text-center">{{serial.licenseCount === 31 ? 'unlimited' : serial.licenseCount }}</td>
+          <td class="text-center">{{serial.activationsCount }}</td>
           <td class="col-actions">
             <!--<button type="button"-->
             <!--ng-click="vm.openSerialtModal(serial, $index)"-->

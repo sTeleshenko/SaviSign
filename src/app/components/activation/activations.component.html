@@ -1,1 +1,127 @@
-activation
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+        <th ng-click="vm.onSortFiltersChanged('docIndex')">
+          №
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'docIndex'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('dateCreate')">
+          Date Create
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'dateCreate'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('serial')">
+          Serial Number
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'serial'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('machineId')">
+          Machine ID
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'machineId'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('firstName')">
+          First Name
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'firstName'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('lastName')">
+          Last Name
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'lastName'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('email')">
+          Email
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'email'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('company')">
+          Company
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'company'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('country')">
+          Country
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'country'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('city')">
+          City
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'city'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('address')">
+          Address
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'address'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('phone')">
+          Phone
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'phone'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('status')">
+          Status
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'status'"></span>
+        </th>
+        <th ng-click="vm.onSortFiltersChanged('reason')">
+          Reason
+          <span class="glyphicon glyphicon-triangle-bottom"
+                ng-class="{reverse: vm.sortFilters.order}"
+                ng-show="vm.sortFilters.sort === 'reason'"></span>
+        </th>
+        <th class="text-center">Actions</th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="activation in vm.activations">
+          <td>{{activation.docIndex}}</td>
+          <td>{{activation.dateCreate | date: 'dd.MM.yyyy'}}</td>
+          <td>{{activation.serial}}</td>
+          <td>{{activation.machineId}}</td>
+          <td>{{activation.firstName}}</td>
+          <td>{{activation.lastName}}</td>
+          <td>{{activation.email}}</td>
+          <td>{{activation.company}}</td>
+          <td>{{activation.country}}</td>
+          <td>{{activation.city}}</td>
+          <td>{{activation.address}}</td>
+          <td>{{activation.phone}}</td>
+          <td>{{activation.status}}</td>
+          <td>{{activation.reason}}</td>
+          <td class="text-center">
+            <button type="button"
+                    ng-click="vm.delete(product, $index)"
+                    class="btn btn-danger btn-sm">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul uib-pagination
+        total-items="vm.pagination.total"
+        ng-model="vm.pagination.page"
+        ng-change="vm.loadActivations()"
+        max-size="6"
+        items-per-page="vm.pagination.limit"
+        class="pagination-sm pull-left"
+        boundary-link-numbers="true"></ul>
+
+  </div>

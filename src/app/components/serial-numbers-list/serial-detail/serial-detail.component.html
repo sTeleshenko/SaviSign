@@ -4,7 +4,7 @@
             <div uib-accordion-group class="panel-primary" heading="Serial info">
                 <p><b>License Count: </b>{{vm.serial.licenseCount}}</p>
                 <p><b>Serial Number: </b>{{vm.serial.key}}</p>
-                <p><b>Activations Count: </b>{{vm.serila.activationsCount}}</p>
+                <p><b>Activations Count: </b>{{vm.serial.activationsCount}}</p>
             </div>
         </uib-accordion>
     </div>
@@ -12,6 +12,8 @@
         <p>
             <button class="btn btn-primary" ng-click="vm.activate()">Activate</button>
         </p>
-        <activations-component></activations-component>
+    </div>
+    <div class="col-md-12">
+        <activations-component activations="vm.activations" pagination="vm.pagination" sort-filters="vm.sortFilters" load-activations="vm.loadActivations()"></activations-component>
     </div>
 </div>
