@@ -2,16 +2,19 @@
   <div class="col-md-3">
     <form ng-submit="vm.onFiltersChanged()">
       <div class="form-group">
-        <label for="productIdSearch">Product ID:</label>
-        <input type="text"
-               name="productIdserch"
-               ng-model-options="{debounce: 300}"
-               class="form-control"
-               ng-model="vm.filters.productId">
+        <label for="productIdSearch">Product:</label>
+        <select name="productIdSearch"
+                id="productIdSearch"
+                class="form-control"
+                ng-options="product.productId as product.name for product in vm.products"
+                ng-model="vm.filters.productId">
+
+        </select>
       </div>
       <div class="form-group">
         <label for="serialPrefix">Serial Prefix:</label>
         <input type="text"
+               id="serialPrefix"
                name="serialPrefix"
                ng-model-options="{debounce: 300}"
                class="form-control"

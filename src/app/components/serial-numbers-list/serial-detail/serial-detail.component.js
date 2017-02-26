@@ -8,7 +8,7 @@
     });
 
   /** @ngInject */
-  function serialDetailComponent(Serial, toastr, $stateParams) {
+  function serialDetailComponent(Serial, toastr, $stateParams, $uibModal) {
     var vm = this;
     vm.$onInit = function () {
       vm.loadSerial();
@@ -22,6 +22,16 @@
         .catch(function () {
           toastr.error('Something went wrong', 'Error');
         });
+    };
+    vm.activate = function(){
+      $uibModal.open({
+        component: 'createActivationComponent',
+        resolve: {
+          serial: function(){
+            return vm.serial.key;
+          }
+        }
+      })
     }
   }
 

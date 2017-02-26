@@ -8,10 +8,11 @@
     });
 
   /** @ngInject */
-  function serialNumberGroupComponent(SerialGroup, localStorageService, $uibModal, toastr, $state, $stateParams, $scope) {
+  function serialNumberGroupComponent(SerialGroup, Product, localStorageService, $uibModal, toastr, $state, $stateParams, $scope) {
     var vm = this;
     vm.$onInit = function () {
       vm.serialGroups = [];
+      vm.products = [];
       vm.sortFilters = localStorageService.get('serialGroupSortFilters') || {
           sort: 'docIndex',
           order: true
@@ -33,6 +34,15 @@
       vm.filters = localStorageService.get('serialGroupFilters') || {};
       $scope.$watch('vm.filters', vm.onFiltersChanged, true);
       vm.loadSerialGroups();
+      vm.loadProducts();
+    };
+
+    vm.loadProducts = function () {
+      Product.getAll('')
+        .then(function (response) {
+          vm.products = response.data.docs;
+          console.log(vm.products)
+        })
     };
 
     vm.uiOnParamsChanged = function (newParams) {
@@ -88,7 +98,7 @@
     vm.openAddSerialModal = function (serialGroup, index) {
       var modalInstance = $uibModal.open({
         animation: true,
-        component: 'createSerialNumberComponent',
+        component: 'createSerialGroupComponent',
         resolve: {
           serialGroup: function () {
             return angular.copy(serialGroup);

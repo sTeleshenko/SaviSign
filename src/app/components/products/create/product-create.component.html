@@ -1,8 +1,18 @@
 <form ng-submit="vm.save()" name="vm.form">
   <div class="modal-header">
-    <h4>Device details</h4>
+    <h4>Register Product</h4>
   </div>
   <div class="modal-body">
+    <div class="form-group">
+      <label for="productName">Product Name:</label>
+      <input type="text"
+             ng-model="vm.product.name"
+             id="productName"
+             class="form-control"
+             placeholder="Serial Prefix"
+             required
+             name="Product Name">
+    </div>
     <div class="form-group">
       <label for="productId">Product ID:</label>
       <input type="text"
@@ -12,16 +22,6 @@
              class="form-control"
              required
              placeholder="Product ID">
-    </div>
-    <div class="form-group">
-      <label for="serialPrefix">Serial Prefix:</label>
-      <input type="text"
-             ng-model="vm.product.serialPrefix"
-             id="serialPrefix"
-             class="form-control"
-             placeholder="Serial Prefix"
-             required
-             name="serialPrefix">
     </div>
   </div>
   <div class="modal-footer">

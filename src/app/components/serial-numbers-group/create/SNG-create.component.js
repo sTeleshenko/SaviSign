@@ -1,19 +1,19 @@
 (function () {
   angular
     .module('app')
-    .component('createSerialNumberComponent', {
+    .component('createSerialGroupComponent', {
       templateUrl: 'app/components/serial-numbers-group/create/SNG-create.component.html',
       bindings: {
         resolve: '<',
         close: '&',
         dismiss: '&'
       },
-      controller: createSerialNumberComponent,
+      controller: createSerialGroupComponent,
       controllerAs: 'vm'
     });
 
   /** @ngInject */
-  function createSerialNumberComponent(SerialGroup, Product, toastr) {
+  function createSerialGroupComponent(SerialGroup, Product, toastr) {
     var vm = this;
     vm.$onInit = function () {
       vm.serialGroup = vm.resolve.serialGroup;
@@ -60,8 +60,5 @@
           vm.products = response.data.docs;
         })
     };
-    vm.productChanged = function () {
-      vm.serialGroup.serialPrefix = vm.serialGroup.product.serialPrefix;
-    }
   }
 })();

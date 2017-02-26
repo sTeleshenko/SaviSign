@@ -7,9 +7,9 @@
   </div>
   <div ng-if="vm.results.products.length" class="search-result-group">
     <div class="search-header">Products</div>
-    <a ui-sref="products({productId: product.productId, serialPrefix: product.serialPrefix})"
+    <a ui-sref="products({productId: product.productId, name: product.name})"
        ng-repeat="product in vm.results.products"
-       class="search-item">{{product.productId}}</a>
+       class="search-item">{{product.name}}</a>
   </div>
   <div ng-if="vm.results.serialGroups.length" class="search-result-group">
     <div class="search-header">Serial Number Group</div>

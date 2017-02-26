@@ -1,1 +1,17 @@
-<pre>{{vm.serial | json}}</pre>
+<div class="row">
+    <div class="col-md-3">
+        <uib-accordion close-others="oneAtATime">
+            <div uib-accordion-group class="panel-primary" heading="Serial info">
+                <p><b>License Count: </b>{{vm.serial.licenseCount}}</p>
+                <p><b>Serial Number: </b>{{vm.serial.key}}</p>
+                <p><b>Activations Count: </b>{{vm.serila.activationsCount}}</p>
+            </div>
+        </uib-accordion>
+    </div>
+    <div class="col-md-9">
+        <p>
+            <button class="btn btn-primary" ng-click="vm.activate()">Activate</button>
+        </p>
+        <activations-component></activations-component>
+    </div>
+</div>
