@@ -8,7 +8,7 @@
     });
 
   /** @ngInject */
-  function NavbarController(Auth, $http, $timeout) {
+  function NavbarController(Auth, $http, $timeout, $uibModal) {
     var vm = this;
     vm.$onInit = function () {
       vm.searchText = '';
@@ -23,6 +23,13 @@
         .then(function (user) {
           vm.user = user;
         });
+    };
+    vm.changePassword = function (ev) {
+      ev.preventDefault();
+      $uibModal.open({
+        animation: true,
+        component: 'changePasswordComponent'
+      })
     };
 
     vm.search = function () {

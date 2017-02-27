@@ -50,7 +50,7 @@
 
     vm.resetFilters = function () {
       vm.filters = {};
-    }
+    };
 
     vm.onSortFiltersChanged = function (key) {
       if (vm.sortFilters.sort === key) {

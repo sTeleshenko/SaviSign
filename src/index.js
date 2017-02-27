@@ -1,5 +1,14 @@
 angular
-  .module('app', ['ui.router', 'ui.bootstrap', 'ngMessages', 'angular-loading-bar', 'LocalStorageModule', 'toastr', 'ngAnimate'])
+  .module('app', [
+    'ui.router',
+    'ui.bootstrap',
+    'ngMessages',
+    'angular-loading-bar',
+    'LocalStorageModule',
+    'toastr',
+    'ngAnimate',
+    'daterangepicker'
+  ])
   .config(function ($httpProvider, $compileProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
     $httpProvider.useApplyAsync(true);

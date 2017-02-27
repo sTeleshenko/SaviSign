@@ -16,6 +16,7 @@
           <li ui-sref-active="active"><a ui-sref="serialGroups">Serial Numbers Groups</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          <li><a ng-click="vm.changePassword($event)" href="#">Change Password</a></li>
           <li><a ui-sref="login">Logout</a></li>
         </ul>
         <form class="navbar-form navbar-right global-search" ng-submit="vm.search()">
@@ -28,9 +29,9 @@
                    ng-change="vm.search()"
                    placeholder="Search">
           </div>
-          <search-results-component result-not-found="vm.resultNotFound" 
+          <search-results-component result-not-found="vm.resultNotFound"
                                     search-text="vm.searchText"
-                                    results="vm.searchResults" 
+                                    results="vm.searchResults"
                                     ng-show="vm.focus"></search-results-component>
         </form>
       </div>

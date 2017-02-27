@@ -62,3 +62,6 @@ th[ng-click]{
   text-decoration: none;
   background-color: #f5f5f5;
 }
+.custom-pad{
+  padding:6px 3px;
+}

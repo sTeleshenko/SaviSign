@@ -18,7 +18,7 @@
     vm.$onInit = function(){
         vm.data = {};
         vm.data.serial = vm.resolve.serial;
-    }
+    };
 
     vm.save = function(){
         Activation.create(vm.data)

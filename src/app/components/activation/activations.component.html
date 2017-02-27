@@ -80,18 +80,39 @@
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'status'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('reason')">
-          Reason
-          <span class="glyphicon glyphicon-triangle-bottom"
-                ng-class="{reverse: vm.sortFilters.order}"
-                ng-show="vm.sortFilters.sort === 'reason'"></span>
-        </th>
         <th class="text-center">Actions</th>
         </thead>
         <tbody>
+        <tr>
+          <form name="vm.form">
+            <td><input type="number" ng-model="vm.filters.docIndex" class="form-control custom-pad"></td>
+            <td><input type="text" date-range-picker ng-model="vm.filters" class="form-control date-picker"></td>
+            <td><input type="text" ng-model="vm.filters.serial" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.machineId" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.firstName" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.lastName" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.email" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.company" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.country" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.city" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.address" class="form-control"></td>
+            <td><input type="text" ng-model="vm.filters.phone" class="form-control"></td>
+            <td>
+              <select id="status" class="form-control custom-pad" ng-model="vm.filters.status">
+                <option value="">All</option>
+                <option value="1">OK</option>
+                <option value="0">Error</option>
+              </select>
+            </td>
+            <td class="col-actions">
+              <button type="button" ng-click="vm.reset()" class="btn btn-danger btn-sm">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button></td>
+          </form>
+        </tr>
         <tr ng-repeat="activation in vm.activations">
           <td>{{activation.docIndex}}</td>
-          <td>{{activation.dateCreate | date: 'dd.MM.yyyy'}}</td>
+          <td>{{activation.dateCreate | date: 'dd.MM.yyyy HH:mm'}}</td>
           <td>{{activation.serial}}</td>
           <td>{{activation.machineId}}</td>
           <td>{{activation.firstName}}</td>
@@ -102,11 +123,22 @@
           <td>{{activation.city}}</td>
           <td>{{activation.address}}</td>
           <td>{{activation.phone}}</td>
-          <td>{{activation.status}}</td>
-          <td>{{activation.reason}}</td>
-          <td class="text-center">
+          <td>
+            <span ng-if="activation.status" class="text-success">OK</span>
+            <small ng-if="!activation.status" class="text-danger">
+              {{activation.reason}}
+            </small>
+          </td>
+          <td class="col-actions">
             <button type="button"
-                    ng-click="vm.delete(product, $index)"
+                    ng-if="activation.status"
+                    title="Show Activation Key"
+                    ng-click="vm.showKey(activation)"
+                    class="btn btn-success btn-sm">
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </button>
+            <button type="button"
+                    ng-click="vm.delete(activation, $index)"
                     class="btn btn-danger btn-sm">
               <span class="glyphicon glyphicon-trash"></span>
             </button>
