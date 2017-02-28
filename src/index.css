@@ -65,3 +65,6 @@ th[ng-click]{
 .custom-pad{
   padding:6px 3px;
 }
+.navbar{
+  border-radius: 0 !important;
+}

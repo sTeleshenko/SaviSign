@@ -41,7 +41,6 @@
       Product.getAll('')
         .then(function (response) {
           vm.products = response.data.docs;
-          console.log(vm.products)
         })
     };
 
