@@ -17,13 +17,13 @@
           ng-model-options="{debounce: 300}"
           ng-submit="vm.search()">
       <div class="form-group">
-        <label for="serialKey">Serial Key:</label>
+        <label for="serialKey">Serial Number:</label>
         <input type="text"
                ng-model="vm.filters.key"
                id="serialKey"
                name="serialKey"
                class="form-control"
-               placeholder="Serial Key">
+               placeholder="Serial Number">
       </div>
       <div class="form-group">
         <label for="docIndex">№:</label>
@@ -51,7 +51,7 @@
                 ng-show="vm.sortFilters.sort === 'docIndex'"></span>
         </th>
         <th class="text-center">Date Create</th>
-        <th>Key</th>
+        <th class="text-center">Serial Number</th>
         <th class="text-center">License Count</th>
         <th class="text-center">Activations Count</th>
         <th class="col-actions">Actions</th>

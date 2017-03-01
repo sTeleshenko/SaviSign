@@ -12,7 +12,7 @@
        class="search-item">{{product.name}}</a>
   </div>
   <div ng-if="vm.results.serialGroups.length" class="search-result-group">
-    <div class="search-header">Serial Number Group</div>
+    <div class="search-header">Serial Numbers Groups</div>
       <a ui-sref="serialNumbersList({id: serialGroup._id})"
         ng-repeat="serialGroup in vm.results.serialGroups"
         class="search-item">{{serialGroup.product.productId}}-{{serialGroup.serialPrefix}}</a>
