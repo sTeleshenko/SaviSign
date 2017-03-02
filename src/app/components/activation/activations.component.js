@@ -9,7 +9,8 @@
           sortFilters: '=',
           pagination: '=',
           loadActivations: '&',
-          filters: '='
+          filters: '=',
+          showSerialField: '<'
       },
       controllerAs: 'vm'
     });

@@ -14,7 +14,7 @@
                 ng-class="{reverse: vm.sortFilters.order}"
                 ng-show="vm.sortFilters.sort === 'dateCreate'"></span>
         </th>
-        <th ng-click="vm.onSortFiltersChanged('serial')">
+        <th ng-if="vm.showSerialField" ng-click="vm.onSortFiltersChanged('serial')">
           Serial Number
           <span class="glyphicon glyphicon-triangle-bottom"
                 ng-class="{reverse: vm.sortFilters.order}"
@@ -87,7 +87,7 @@
           <form name="vm.form">
             <td><input type="number" ng-model="vm.filters.docIndex" class="form-control custom-pad"></td>
             <td><input type="text" date-range-picker ng-model="vm.filters" class="form-control date-picker"></td>
-            <td><input type="text" ng-model="vm.filters.serial" class="form-control"></td>
+            <td ng-if="vm.showSerialField"><input type="text" ng-model="vm.filters.serial" class="form-control"></td>
             <td><input type="text" ng-model="vm.filters.machineId" class="form-control"></td>
             <td><input type="text" ng-model="vm.filters.firstName" class="form-control"></td>
             <td><input type="text" ng-model="vm.filters.lastName" class="form-control"></td>
@@ -113,7 +113,7 @@
         <tr ng-repeat="activation in vm.activations">
           <td>{{activation.docIndex}}</td>
           <td>{{activation.dateCreate | date: 'dd.MM.yyyy HH:mm'}}</td>
-          <td>{{activation.serial}}</td>
+          <td ng-if="vm.showSerialField">{{activation.serial}}</td>
           <td>{{activation.machineId}}</td>
           <td>{{activation.firstName}}</td>
           <td>{{activation.lastName}}</td>
